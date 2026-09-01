@@ -12,21 +12,22 @@ slice, with the wider game designed on paper.
 
 ## Status
 
-`v0.2 — design & roadmap (submission)`
+`v0.3 — design & roadmap (submission)`
 
 ## Documents
 
 | Document | Description |
 | --- | --- |
-| [`docs/design-plan.html`](docs/design-plan.html) | **Design & Development Roadmap v0.2** — submission document. Cover sheet, executive summary, scope boundary, the Unreal MCP workflow, technical architecture, the Scripture-encounter mechanic, the three trials, content handling, a phase-by-phase 14-week roadmap with exit criteria, milestone schedule, risk register, assessment mapping, tools, and references. Open in a browser (prints cleanly to PDF). |
+| [`docs/design-plan.html`](docs/design-plan.html) | **Design & Development Roadmap v0.3** — submission document. Cover sheet, executive summary, scope boundary, the Unreal MCP workflow, technical architecture, the Scripture-encounter mechanic, the three trials, content handling, the seduction encounter in detail (the "arrows of lust" system, grounded in Ephesians 6), a phase-by-phase 14-week roadmap with exit criteria, milestone schedule, risk register, assessment mapping, tools, and references. Open in a browser (prints cleanly to PDF). |
 
 ## Concept summary
 
 - **Character select** — prophet, high-school student, or nurse (slice builds the student only).
 - **The village + first mountain stretch** — assembled in Unreal with editor MCP assistance over a purchased environment kit.
 - **Trials** — framed as the triad of 1 John 2:16: lust of the flesh (seduction), lust of the eyes (money), pride of life (wealth & status). The slice builds the seduction trial end to end.
-- **Scripture encounters** — the core mechanic, anchored in Matthew 4. A tempter misapplies a verse; the player must answer with correctly applied Scripture. Right answers break the tempter's *influence*; wrong answers drain the player's *resolve*.
-- **Win / lose** — break the tempter's influence and ascend; run out of resolve and fall to the prison level.
+- **Scripture encounters** — the core mechanic, anchored in Matthew 4. A tempter misapplies a verse; the player must answer with correctly applied Scripture. Right answers break the tempter's *composure*; wrong answers drain the player's *resolve*.
+- **The arrow system** — grounded in Ephesians 6:10–18. Unseen demons loose named "arrows of lust" at the player, who feels the impact but never sees the source; a correct Scripture choice fires back a "word of God" arrow at the tempter. Played as an interactive cinematic with a player-determined ending (Overcome clean / Overcome wounded / Fall).
+- **Win / lose** — break the tempter's composure and ascend; run out of resolve and fall to the prison level.
 
 ## Scope for the capstone
 

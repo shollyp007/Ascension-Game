@@ -159,6 +159,7 @@
   .trials{display:grid;gap:1rem;grid-template-columns:1fr;margin:1.4rem 0}
   @media(min-width:760px){.trials{grid-template-columns:repeat(3,1fr)}}
   .trial{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--crimson);border-radius:4px;padding:1.05rem 1.1rem}
+  .trial.win{border-top-color:var(--olive)}
   .trial .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);margin:0 0 .3rem}
   .trial h4{margin:0 0 .5rem;font-family:var(--display);font-weight:600;font-size:1.03rem}
   .trial p{font-size:.89rem;line-height:1.52;margin:0 0 .55rem}
@@ -246,10 +247,10 @@
       <div><dt>Institution</dt><dd><span class="fill">[institution]</span></dd></div>
       <div><dt>Date</dt><dd>31 August 2026</dd></div>
       <div><dt>Repository</dt><dd><a href="https://github.com/shollyp007/Ascension-Game">github.com/shollyp007/Ascension-Game</a></dd></div>
-      <div><dt>Document</dt><dd>Design &amp; Roadmap, v0.2</dd></div>
+      <div><dt>Document</dt><dd>Design &amp; Roadmap, v0.3</dd></div>
     </dl>
 
-    <p class="callout rise"><strong>Note for the assessor.</strong> The repository is public and can be opened directly from the link above. Commit history documents the project&rsquo;s progress against the roadmap in Section&nbsp;IX.</p>
+    <p class="callout rise"><strong>Note for the assessor.</strong> The repository is public and can be opened directly from the link above. Commit history documents the project&rsquo;s progress against the roadmap in Section&nbsp;X.</p>
 
     <nav class="toc rise">
       <h2>Contents</h2>
@@ -262,6 +263,7 @@
         <li><a href="#mechanic">Core mechanic &mdash; Scripture encounters</a></li>
         <li><a href="#trials">The three first-layer trials</a></li>
         <li><a href="#content">Handling the seduction theme</a></li>
+        <li><a href="#encounter">The seduction encounter: direction &amp; the arrow system</a></li>
         <li><a href="#roadmap">Development roadmap</a></li>
         <li><a href="#risks">Risk register</a></li>
         <li><a href="#criteria">Success criteria &amp; assessment mapping</a></li>
@@ -277,7 +279,7 @@
       <h2 data-num="I">Executive summary</h2>
       <p><em>Ascension</em> is a single-player, story-driven game built in Unreal Engine&nbsp;5. The player takes up one of three lives &mdash; a prophet, a high-school student, or a nurse &mdash; and climbs a mountain that rises over a village. Each stage of the climb is a trial set by the Village Master and worked against by tempting spirits. The trials are won not with weapons but with Scripture: the player who knows the word of God, and how to apply it, advances; the player who does not, falls. The tempters know the word too, and quote it out of shape &mdash; as in Matthew&nbsp;4.</p>
       <p>The project is scoped to a single, fully polished <strong>vertical slice</strong>: one character, the village and the first stretch of mountain, and one complete trial &mdash; the trial of the flesh &mdash; playable from start to resolution, with a character-select menu, a faith / resolve meter, win and lose states, a prison scene, and a working save file. The wider game is designed on paper and presented as concept. Unreal&rsquo;s editor MCP (Model Context Protocol) is used to accelerate level blockout, set dressing, and Blueprint scaffolding.</p>
-      <p>The remainder of this document sets out the concept, the scope boundary, the technical approach, the core mechanic and its scriptural grounding, and a week-by-week development roadmap with deliverables, exit criteria, risks, and assessment mapping.</p>
+      <p>The remainder of this document sets out the concept, the scope boundary, the technical approach, the core mechanic and its scriptural grounding, the seduction encounter in detail, and a week-by-week development roadmap with deliverables, exit criteria, risks, and assessment mapping.</p>
     </section>
 
     <section id="vision">
@@ -289,6 +291,7 @@
       <ul class="body">
         <li><strong>Scripture as strength.</strong> Progress is gated on knowledge and discernment, never reflex or force.</li>
         <li><strong>The tempter is literate.</strong> Encounters are a contest of interpretation, modelled on Matthew&nbsp;4 &mdash; &ldquo;It is written&hellip; It is also written.&rdquo;</li>
+        <li><strong>The unseen war.</strong> The player fights forces they cannot see (Ephesians&nbsp;6:12) and feels every blow that lands.</li>
         <li><strong>Failure teaches.</strong> A wrong answer always ends with the correct passage and its explanation, so a loss is still a lesson.</li>
         <li><strong>Restraint.</strong> Temptation is dialogue and choice, never depiction.</li>
       </ul>
@@ -304,8 +307,9 @@
             <li>One character &mdash; the high-school student (simplest to model, rig, and dress)</li>
             <li>One environment &mdash; the village and the first stretch of mountain</li>
             <li>One trial, fully playable &mdash; the trial of the flesh (seduction)</li>
+            <li>The &ldquo;arrows of lust&rdquo; system &mdash; unseen assailants, named projectiles, word-of-God responses (Section&nbsp;IX)</li>
             <li>Character-select menu with persistence across levels</li>
-            <li>Faith / resolve meter and tempter influence meter with UI</li>
+            <li>Faith / resolve meter and tempter composure meter with UI</li>
             <li>Pass and fail resolution; the prison scene; a working save file</li>
           </ul>
         </div>
@@ -361,6 +365,7 @@
         <li><strong>Trial / encounter</strong> &mdash; a <code>BP_Trial</code> actor with a trigger volume freezes movement and starts a dialogue encounter on overlap.</li>
         <li><strong>Dialogue &amp; choice UI</strong> &mdash; a plugin (DlgSystem, Not-Yet-Dialogue, or Dialogue Tree), not hand-rolled.</li>
         <li><strong>Scripture knowledge check</strong> &mdash; the core mechanic (Section&nbsp;VI), driven by a Data Table.</li>
+        <li><strong>Encounter direction</strong> &mdash; the arrow system, felt-impact effects, and cinematics (Section&nbsp;IX).</li>
         <li><strong>Resolution</strong> &mdash; a pass raises the faith stat and opens the path up; a fail teleports to the prison level and shows a game-over screen with the relevant verse and an invitation to try again.</li>
         <li><strong>Save</strong> &mdash; an Unreal SaveGame object holding character, current level, faith stat, and trials passed; the struct is versioned from the start.</li>
         <li><strong>Spirits</strong> &mdash; dialogue actors that patrol a spline or run a simple Behavior Tree; the attack is verbal &mdash; they approach and open a trial.</li>
@@ -373,8 +378,8 @@
       <ol class="loop">
         <li>The tempter makes a proposition and backs it with a real but misapplied verse.</li>
         <li>The player is given three or four responses. One is a correctly applied Scripture; the others are plausible worldly reasoning or misused verses.</li>
-        <li>A right answer drops the tempter&rsquo;s <em>influence</em> meter. A wrong answer drops the player&rsquo;s <em>resolve</em> meter.</li>
-        <li>Three to five exchanges per encounter. Resolve runs out &rarr; the player falls &rarr; prison. The tempter&rsquo;s influence breaks &rarr; the player ascends.</li>
+        <li>A right answer drops the tempter&rsquo;s <em>composure</em> meter. A wrong answer drops the player&rsquo;s <em>resolve</em> meter.</li>
+        <li>Three to five exchanges per encounter. Resolve runs out &rarr; the player falls &rarr; prison. The tempter&rsquo;s composure breaks &rarr; the player ascends.</li>
       </ol>
       <h3>Content pipeline</h3>
       <p>Each row of a Data Table is one exchange: the tempter&rsquo;s line, the misused reference, four options each flagged <code>bIsCorrect</code>, and an explanation shown afterward <em>whatever</em> the outcome &mdash; so the player learns. Content is authored in a spreadsheet, kept separate from code, and handed to a qualified reviewer.</p>
@@ -389,7 +394,7 @@
           <p class="k">Lust of the flesh</p>
           <h4>Seduction &mdash; built</h4>
           <p>Tempting spirits press the player toward fornication through flattery and proposition. Verbal and symbolic only, never depicted.</p>
-          <p class="refs">Proverbs 7 &middot; 1 Cor 6:18 &middot; 2 Tim 2:22</p>
+          <p class="refs">Eph 6:10&ndash;18 &middot; Proverbs 7 &middot; 1 Cor 6:18 &middot; 2 Tim 2:22</p>
         </div>
         <div class="trial">
           <p class="k">Lust of the eyes</p>
@@ -415,8 +420,91 @@
       </ul>
     </section>
 
+    <section id="encounter">
+      <h2 data-num="IX">The seduction encounter: direction &amp; the arrow system</h2>
+      <p>This section details how the trial of the flesh plays. Its scriptural anchor, alongside Matthew&nbsp;4, is <strong>Ephesians&nbsp;6:10&ndash;18</strong> &mdash; the armour of God. The passage supplies the mechanic almost whole: <em>&ldquo;the shield of faith, with which you can extinguish all the flaming arrows of the evil one&rdquo;</em> (v.16); <em>&ldquo;the sword of the Spirit, which is the word of God&rdquo;</em> (v.17); <em>&ldquo;we do not wrestle against flesh and blood&hellip; but against the spiritual forces of evil&rdquo;</em> (v.12). James&nbsp;1:14&ndash;15 gives the stakes: desire, unresisted, conceives and gives birth to sin.</p>
+
+      <h3>Presentation</h3>
+      <p>The encounter plays as an interactive cinematic &mdash; a realistic, film-grade scene using Unreal&rsquo;s Sequencer and a MetaHuman performer, with the choice interface layered over a live camera. The player&rsquo;s choices, not a scripted outcome, decide which ending sequence plays.</p>
+
+      <h3>The fiction, and what the player perceives</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Element</th><th>How it is realised</th></tr></thead>
+          <tbody>
+            <tr><td>The tempter</td><td>A visible MetaHuman with an authored performance per beat &mdash; approach, gaze, gesture &mdash; and voiced lines. Her words are aimed at the player like arrows; she carries a <em>composure</em> meter.</td></tr>
+            <tr><td>The demons</td><td>Hidden actors positioned around the scene (<code>SetActorHiddenInGame</code>). The player never sees them &mdash; being unseen, they cost almost nothing to art-direct.</td></tr>
+            <tr><td>Arrows of lust</td><td><code>BP_LustArrow</code> projectiles loosed by the demons on each beat. Every arrow has a named <em>type</em> &mdash; <em>Fantasy, Vanity, &ldquo;Just once,&rdquo; &ldquo;You deserve this,&rdquo; Loneliness, Curiosity</em> &mdash; and a signature impact effect.</td></tr>
+            <tr><td>What the player perceives</td><td>Not the demons or the arrows &mdash; only the <em>impact</em>: a vignette pulse, colour draining, a heartbeat, the camera drifting, the tempter rendered warmer and more appealing, and a whispered voice speaking the arrow&rsquo;s name. The resolve meter falls.</td></tr>
+            <tr><td>The word of God</td><td>A correct response fires <code>BP_WordArrow</code> &mdash; a homing beam of light trailing the verse text &mdash; from the player to the tempter. It strikes; her composure drops; the pressure in the scene lifts. A wrong response: the arrow falls short or is turned back; resolve drops; the demons press harder.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>One beat</h3>
+      <ol class="loop">
+        <li>The tempter advances &mdash; a line and an animation. At the same instant the unseen demons loose one or two named arrows at the player.</li>
+        <li>The player feels the impact. Effects, a whispered name, and the resolve meter under pressure signal <em>what</em> is incoming, though nothing is seen.</li>
+        <li>Choice: three or four responses. One correctly applies Scripture to that specific arrow or proposition.</li>
+        <li>Correct &rarr; the word-arrow strikes; composure falls; pressure lifts; the scene continues on the resisting branch. Wrong &rarr; resolve falls; the next beat is harder; the scene continues on the yielding branch.</li>
+        <li>After about five beats: composure broken &rarr; the <em>Overcome</em> ending; resolve gone &rarr; the <em>Fall</em> ending.</li>
+      </ol>
+
+      <div class="split">
+        <div class="panel">
+          <h4>Naming the arrow</h4>
+          <ul>
+            <li>Default: arrows unseen. The name arrives as a whisper, a split-second text flash at the screen edge, and a type-specific effect.</li>
+            <li>On a wrong answer, the arrow that landed is revealed as it strikes &mdash; so a loss still shows what was missed and what it was called.</li>
+            <li>Naming the temptation before countering it is itself the lesson (2&nbsp;Corinthians&nbsp;10:5, &ldquo;take every thought captive&rdquo;).</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>The Shield of Faith &mdash; active defence</h4>
+          <ul>
+            <li>Once per encounter the player may raise the shield: time dilates, the incoming arrows become briefly visible with their labels, and the player chooses which to block.</li>
+            <li>Straight from Ephesians&nbsp;6:16. It rewards attention and gives the player one moment of agency against the unseen.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Endings &mdash; the player determines the end</h3>
+      <p>The ending is chosen from both meters <em>and</em> the choice history, not a single pass / fail flag. Each closing sequence names what happened.</p>
+      <div class="trials">
+        <div class="trial win">
+          <p class="k">Resolve held</p>
+          <h4>Overcome &mdash; clean</h4>
+          <p>Few hits landed. A closing verse of victory; the mountain path opens in light.</p>
+          <p class="refs">1 Cor 10:13 &middot; James 4:7</p>
+        </div>
+        <div class="trial win">
+          <p class="k">Won, but wounded</p>
+          <h4>Overcome &mdash; wounded</h4>
+          <p>The tempter is defeated, but blows got through. The same path, with a sombre word on grace and the nearness of the fall.</p>
+          <p class="refs">Jude 22&ndash;23 &middot; Rom 7:24&ndash;25</p>
+        </div>
+        <div class="trial">
+          <p class="k">Resolve spent</p>
+          <h4>Fall</h4>
+          <p>Fade to black; the prison. The arrow that struck the final blow is named on screen, then the verse that would have answered it &mdash; as instruction.</p>
+          <p class="refs">James 1:14&ndash;15 &middot; Prov 7:24&ndash;27</p>
+        </div>
+      </div>
+
+      <h3>Build notes</h3>
+      <ul class="body">
+        <li><strong>Tempter:</strong> MetaHuman + Control Rig; a small authored animation set driven per beat from Sequencer; a blendspace idle between beats.</li>
+        <li><strong>Demons:</strong> skeletal-mesh actors on hidden spawn points; simple aim-and-fire on a timer synced to the dialogue plugin&rsquo;s beat events.</li>
+        <li><strong>Arrows:</strong> <code>BP_LustArrow</code> with a <code>Type</code> enum, a Niagara streak, and a name widget shown only on reveal; on hit it applies the type&rsquo;s effect and drops resolve. <code>BP_WordArrow</code> homes to the tempter and drops composure.</li>
+        <li><strong>Felt impact:</strong> one Post-Process Volume driven by the resolve value &mdash; vignette, desaturation, and aberration rise as resolve falls; a MetaSound for heartbeat and whispers; camera shake.</li>
+        <li><strong>Flow &amp; endings:</strong> an encounter state machine tracks both meters and a flag set; Level Sequences per beat and per ending are triggered from it.</li>
+      </ul>
+
+      <p class="callout italic">Scope for the slice: one tempter, about five beats, two endings plus the wounded variant, and arrows as simple Niagara streaks &mdash; not modelled projectiles. The unseen demons need only placeholder meshes; the budget goes to what the player feels.</p>
+    </section>
+
     <section id="roadmap">
-      <h2 data-num="IX">Development roadmap</h2>
+      <h2 data-num="X">Development roadmap</h2>
       <p>Roughly 14 weeks, solo. Each phase names its tasks, its deliverables, and an exit criterion that must be met before the next phase begins. If the schedule slips, the non-negotiable core is: the menu, one trial, pass / fail, the prison, and the written report.</p>
 
       <div class="phase">
@@ -460,7 +548,8 @@
             <li>Character-select menu &rarr; GameInstance persistence</li>
             <li><code>BP_Trial</code> trigger &rarr; encounter flow; integrate the dialogue plugin</li>
             <li>Design the Scripture Data Table schema; wire a placeholder trial from it</li>
-            <li>Resolve and influence meters + UMG HUD; pass / fail resolution</li>
+            <li>Resolve and composure meters + UMG HUD; pass / fail resolution</li>
+            <li>Encounter state machine (both meters + flag set) driving Level Sequences</li>
             <li>Prison level and game-over / continue flow</li>
             <li>Versioned SaveGame (character, level, faith, trials passed); main menu with Continue</li>
           </ul>
@@ -471,18 +560,20 @@
       </div>
 
       <div class="phase">
-        <div class="ph-head"><span class="tag">PHASE 3</span><h3>Content &mdash; the seduction trial</h3><span class="wks">Weeks 9&ndash;10</span></div>
+        <div class="ph-head"><span class="tag">PHASE 3</span><h3>Content &mdash; the seduction trial &amp; arrow system</h3><span class="wks">Weeks 9&ndash;10</span></div>
         <div class="ph-body">
           <h4>Tasks</h4>
           <ul>
-            <li>Write the five-exchange seduction script &mdash; misapplied vs correctly applied Scripture for each</li>
+            <li>Write the five-beat seduction script &mdash; misapplied vs correctly applied Scripture, and the named arrow(s) per beat</li>
             <li>Doctrinal review and sign-off; revise</li>
             <li>Author the reviewed content into the Data Table; write the explanation screens</li>
-            <li>Build the tempter spirit &mdash; patrol spline, approach behaviour, trial trigger</li>
-            <li>Dialogue presentation styling; optional voice-over</li>
+            <li>Build the tempter as a MetaHuman with a per-beat authored performance</li>
+            <li>Build the arrow system &mdash; hidden demons, <code>BP_LustArrow</code> (named types, Niagara streaks), <code>BP_WordArrow</code>, the Shield-of-Faith beat</li>
+            <li>Felt-impact effects &mdash; resolve-driven post-process, whispers, heartbeat, camera drift</li>
+            <li>The three ending sequences (Overcome clean / wounded / Fall)</li>
           </ul>
           <h4>Deliverables</h4>
-          <ul><li>The trial of the flesh &mdash; complete, reviewed, and in the build</li></ul>
+          <ul><li>The trial of the flesh &mdash; complete, reviewed, and in the build, with all three endings reachable</li></ul>
           <div class="exit"><b>Exit criterion</b>Reviewer sign-off received, and the trial passes a playtest for clarity and difficulty.</div>
         </div>
       </div>
@@ -492,7 +583,7 @@
         <div class="ph-body">
           <h4>Tasks</h4>
           <ul>
-            <li>Audio &mdash; ambience, music, UI and outcome stingers</li>
+            <li>Audio &mdash; ambience, music, UI and outcome stingers, arrow-impact and whisper passes</li>
             <li>Meter tuning from playtest data; difficulty balance</li>
             <li>UI polish; bug triage; performance pass (Nanite / Lumen scalability)</li>
             <li>Accessibility &mdash; text size, subtitles, remappable input, reduced-motion option</li>
@@ -527,7 +618,7 @@
             <tr><td class="k">4</td><td>Environment walkable</td><td>Village + mountain fly-through video</td></tr>
             <tr><td class="k">6</td><td>Menu &amp; persistence; dialogue running</td><td>Character select &rarr; first conversation</td></tr>
             <tr><td class="k">8</td><td>Trial loop complete</td><td>Placeholder trial with save / load</td></tr>
-            <tr><td class="k">10</td><td>Seduction trial shipped &amp; reviewed</td><td>Reviewed content in the build</td></tr>
+            <tr><td class="k">10</td><td>Seduction trial &amp; arrow system shipped &amp; reviewed</td><td>Reviewed content in the build, three endings</td></tr>
             <tr><td class="k">12</td><td>Release candidate</td><td>RC build + playtest report</td></tr>
             <tr><td class="k">14</td><td>Submission</td><td>Report, video, deck, tagged build</td></tr>
           </tbody>
@@ -536,14 +627,15 @@
     </section>
 
     <section id="risks">
-      <h2 data-num="X">Risk register</h2>
+      <h2 data-num="XI">Risk register</h2>
       <div class="tablewrap">
         <table>
           <thead><tr><th>Risk</th><th>L</th><th>I</th><th>Mitigation</th></tr></thead>
           <tbody>
             <tr><td>Unreal learning curve slows Phases 1&ndash;2</td><td><span class="pill">Med</span></td><td><span class="pill">High</span></td><td>Stay on the template and Blueprints; buy the kit rather than build it; weekly supervisor check-in</td></tr>
             <tr><td>MCP server unstable or limited</td><td><span class="pill">Med</span></td><td><span class="pill">Med</span></td><td>Treat MCP as an accelerator, not a dependency; every placement task has a manual fallback</td></tr>
-            <tr><td>Doctrinal reviewer unavailable in time</td><td><span class="pill">Low</span></td><td><span class="pill">High</span></td><td>Confirm the reviewer in Phase 0; keep the script short (five exchanges)</td></tr>
+            <tr><td>Arrow VFX and MetaHuman performance overrun Phase 3</td><td><span class="pill">Med</span></td><td><span class="pill">Med</span></td><td>Arrows stay simple Niagara streaks; a small authored animation set for the tempter; drop to two endings if needed</td></tr>
+            <tr><td>Doctrinal reviewer unavailable in time</td><td><span class="pill">Low</span></td><td><span class="pill">High</span></td><td>Confirm the reviewer in Phase 0; keep the script short (five beats)</td></tr>
             <tr><td>Scope creep &mdash; second character, more trials</td><td><span class="pill">High</span></td><td><span class="pill">High</span></td><td>Scope frozen in this document; all changes go to a backlog, not the build</td></tr>
             <tr><td>Asset licensing issues for the village kit</td><td><span class="pill">Low</span></td><td><span class="pill">Med</span></td><td>Use only Fab-licensed or Epic-owned content; keep licence records</td></tr>
             <tr><td>SaveGame changes corrupt progress</td><td><span class="pill">Med</span></td><td><span class="pill">Med</span></td><td>Version the SaveGame struct from the start; test load early (Phase 2 exit)</td></tr>
@@ -554,14 +646,14 @@
     </section>
 
     <section id="criteria">
-      <h2 data-num="XI">Success criteria &amp; assessment mapping</h2>
+      <h2 data-num="XII">Success criteria &amp; assessment mapping</h2>
       <p>The slice is considered successful when a first-time player can select a character, attempt the seduction trial, lose to the prison, reload, and win through to the mountain path &mdash; understanding, at the end, which Scripture applied and why. The table maps project evidence to typical capstone assessment areas; it will be aligned to the module rubric with the supervisor.</p>
       <div class="tablewrap">
         <table>
           <thead><tr><th>Assessment area</th><th>Evidence in this project</th></tr></thead>
           <tbody>
-            <tr><td>Technical competence</td><td>MCP-driven pipeline; Blueprint gameplay systems; data-driven content; versioned save / load</td></tr>
-            <tr><td>Design</td><td>A documented mechanic grounded in Matthew 4 and 1 John 2:16; playtested difficulty; learning-through-failure loop</td></tr>
+            <tr><td>Technical competence</td><td>MCP-driven pipeline; Blueprint gameplay systems; the arrow system and encounter state machine; data-driven content; versioned save / load</td></tr>
+            <tr><td>Design</td><td>A documented mechanic grounded in Matthew 4, 1 John 2:16, and Ephesians 6:10&ndash;18; a branching, player-determined ending; playtested difficulty; learning-through-failure loop</td></tr>
             <tr><td>Scope &amp; project management</td><td>Delivered slice matches the frozen scope; roadmap with exit criteria; backlog of deferred work; risk register</td></tr>
             <tr><td>Research</td><td>Engine and MCP evaluation notes; doctrinal review; asset and plugin comparison</td></tr>
             <tr><td>Communication</td><td>This document; the narrated demo video; the presentation</td></tr>
@@ -571,7 +663,7 @@
     </section>
 
     <section id="tools">
-      <h2 data-num="XII">Tools &amp; resources</h2>
+      <h2 data-num="XIII">Tools &amp; resources</h2>
       <div class="tablewrap">
         <table>
           <thead><tr><th>Category</th><th>Choice</th><th>Notes</th></tr></thead>
@@ -579,6 +671,8 @@
             <tr><td>Engine</td><td>Unreal Engine 5.4+</td><td>Third Person template; Blueprints-first</td></tr>
             <tr><td>Editor automation</td><td>Unreal MCP server</td><td>Specific server selected in Phase 0</td></tr>
             <tr><td>Dialogue</td><td>DlgSystem / Not-Yet-Dialogue</td><td>Chosen in Phase 0</td></tr>
+            <tr><td>Characters</td><td>MetaHuman (tempter); template mannequin (player)</td><td>Free from Epic; Control Rig for authored performance</td></tr>
+            <tr><td>Cinematics &amp; VFX</td><td>Sequencer; Niagara</td><td>Arrow streaks, light beams, ending sequences</td></tr>
             <tr><td>Environment</td><td>Fab village kit</td><td>Licence records kept</td></tr>
             <tr><td>Version control</td><td>Git + GitHub (public) + Git LFS</td><td><a href="https://github.com/shollyp007/Ascension-Game">github.com/shollyp007/Ascension-Game</a></td></tr>
             <tr><td>Project tracking</td><td>GitHub Issues + Projects</td><td>Backlog and milestone board</td></tr>
@@ -590,11 +684,11 @@
     </section>
 
     <section id="references">
-      <h2 data-num="XIII">References</h2>
+      <h2 data-num="XIV">References</h2>
       <p>Citation style to be aligned with the department&rsquo;s requirement; the Bible translation used in-game will be stated (e.g. ESV, NIV, or KJV).</p>
       <ul class="body">
-        <li><em>The Holy Bible.</em> Matthew 4:1&ndash;11; Luke 4:1&ndash;13; 1&nbsp;John 2:16; Proverbs 7; 1&nbsp;Corinthians 6:18; 2&nbsp;Timothy 2:22; 1&nbsp;Timothy 6:9&ndash;10; Matthew 6:24; Jeremiah 9:23&ndash;24; James 4:6.</li>
-        <li>Epic Games. <em>Unreal Engine 5 Documentation.</em> docs.unrealengine.com &mdash; Blueprints, UMG, SaveGame, Behavior Trees, Nanite, Lumen, PCG Framework.</li>
+        <li><em>The Holy Bible.</em> Matthew 4:1&ndash;11; Luke 4:1&ndash;13; 1&nbsp;John 2:16; Ephesians 6:10&ndash;18; James 1:14&ndash;15; 2&nbsp;Corinthians 10:3&ndash;5; 1&nbsp;Corinthians 10:13; James 4:7; Jude 22&ndash;23; Romans 7:24&ndash;25; Proverbs 7; 1&nbsp;Corinthians 6:18; 2&nbsp;Timothy 2:22; 1&nbsp;Timothy 6:9&ndash;10; Matthew 6:24; Jeremiah 9:23&ndash;24; James 4:6.</li>
+        <li>Epic Games. <em>Unreal Engine 5 Documentation.</em> docs.unrealengine.com &mdash; Blueprints, UMG, SaveGame, Behavior Trees, Sequencer, Niagara, MetaHuman, Nanite, Lumen, PCG Framework.</li>
         <li>Epic Games. <em>Fab</em> content marketplace &mdash; licensing terms.</li>
         <li>Anthropic. <em>Model Context Protocol</em> specification. modelcontextprotocol.io.</li>
         <li>Community Unreal MCP server &mdash; specific project and repository cited once selected in Phase 0.</li>
@@ -604,8 +698,8 @@
   </div>
 
   <footer>
-    Ascension &middot; Design &amp; Roadmap v0.2 &middot; 31 August 2026<br>
-    Repository: github.com/shollyp007/Ascension-Game &middot; Document history: v0.1 initial ideas &rarr; v0.2 submission roadmap
+    Ascension &middot; Design &amp; Roadmap v0.3 &middot; 31 August 2026<br>
+    Repository: github.com/shollyp007/Ascension-Game &middot; Document history: v0.1 initial ideas &rarr; v0.2 submission roadmap &rarr; v0.3 encounter direction &amp; arrow system
   </footer>
 
 </div>
