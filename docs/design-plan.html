@@ -6,26 +6,28 @@
   :root{
     --ground:#F3EEE4;
     --surface:#FBF8F1;
+    --raise:#F8F3E9;
     --ink:#23272E;
     --ink-soft:#57534A;
-    --stone:#98907F;
-    --line:#DCD5C4;
+    --stone:#948C7B;
+    --line:#DBD4C3;
     --gold:#8C6415;
     --gold-bright:#B5893A;
     --crimson:#9A3B32;
-    --olive:#5C7148;
+    --olive:#566B43;
     --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
     --serif:"Spectral",Georgia,"Times New Roman",serif;
     --display:"Fraunces","Spectral",Georgia,serif;
   }
   @media (prefers-color-scheme:dark){
     :root:not([data-theme="light"]){
-      --ground:#15181E;
-      --surface:#1E222A;
+      --ground:#14171D;
+      --surface:#1D212A;
+      --raise:#232833;
       --ink:#E9E4D7;
       --ink-soft:#ABA592;
-      --stone:#6E695B;
-      --line:#2E323B;
+      --stone:#6D6859;
+      --line:#2D313A;
       --gold:#D2A652;
       --gold-bright:#E7C079;
       --crimson:#D0705F;
@@ -33,12 +35,13 @@
     }
   }
   :root[data-theme="dark"]{
-    --ground:#15181E;
-    --surface:#1E222A;
+    --ground:#14171D;
+    --surface:#1D212A;
+    --raise:#232833;
     --ink:#E9E4D7;
     --ink-soft:#ABA592;
-    --stone:#6E695B;
-    --line:#2E323B;
+    --stone:#6D6859;
+    --line:#2D313A;
     --gold:#D2A652;
     --gold-bright:#E7C079;
     --crimson:#D0705F;
@@ -54,212 +57,278 @@
     line-height:1.72;
     -webkit-font-smoothing:antialiased;
   }
-  .shell{max-width:53rem;margin:0 auto;padding:clamp(2.5rem,7vw,5.5rem) 1.5rem 6rem}
+  .shell{max-width:53rem;margin:0 auto;padding:clamp(2.25rem,6vw,4.5rem) 1.5rem 6rem}
 
-  /* ---- hero ---- */
-  .hero{border-bottom:1px solid var(--line);padding-bottom:2.75rem;margin-bottom:3.5rem}
+  /* ---------- cover ---------- */
   .eyebrow{
-    font-family:var(--mono);
-    font-size:.72rem;
-    letter-spacing:.18em;
-    text-transform:uppercase;
-    color:var(--stone);
-    margin:0 0 1.4rem;
+    font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--stone);margin:0 0 1.3rem;
   }
   h1{
-    font-family:var(--display);
-    font-optical-sizing:auto;
-    font-weight:600;
-    font-size:clamp(2.7rem,8vw,4.6rem);
-    line-height:.98;
-    letter-spacing:-.01em;
-    margin:0 0 .5rem;
-    text-wrap:balance;
+    font-family:var(--display);font-optical-sizing:auto;font-weight:600;
+    font-size:clamp(2.9rem,9vw,5.2rem);line-height:.95;letter-spacing:-.015em;
+    margin:0 0 .45rem;text-wrap:balance;
   }
   .sub{
-    font-family:var(--display);
-    font-weight:400;
-    font-style:italic;
-    font-size:clamp(1.15rem,3vw,1.5rem);
-    color:var(--ink-soft);
-    margin:0 0 1.9rem;
-  }
-  .lede{max-width:40rem;margin:0}
-  .meta{
-    list-style:none;padding:0;margin:2rem 0 0;
-    display:flex;flex-wrap:wrap;gap:.5rem 1.75rem;
-    font-family:var(--mono);font-size:.76rem;letter-spacing:.04em;color:var(--stone);
-  }
-  .meta b{color:var(--ink-soft);font-weight:500}
-
-  .note{
-    margin:2.25rem 0 0;
-    border-left:2px solid var(--gold);
-    background:var(--surface);
-    padding:.9rem 1.2rem;
-    font-style:italic;
-    color:var(--ink-soft);
-    font-size:.98rem;
+    font-family:var(--display);font-weight:400;font-style:italic;
+    font-size:clamp(1.15rem,3vw,1.55rem);color:var(--ink-soft);margin:0 0 .4rem;
+    max-width:34rem;text-wrap:balance;
   }
 
-  /* ---- sections / trail ---- */
-  .doc section{margin-top:3.25rem}
+  .ridge{display:block;width:100%;height:clamp(110px,20vw,190px);margin:1.6rem 0 2.4rem}
+  .r-back{fill:var(--line)}
+  .r-front{fill:var(--gold);opacity:.13}
+  .trail{stroke:var(--gold);stroke-width:2.2;stroke-dasharray:1.5 6;stroke-linecap:round;fill:none}
+  .summit{fill:var(--gold)}
+
+  .cover-meta{
+    display:grid;grid-template-columns:1fr;gap:.1rem 2rem;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:1.4rem 0;margin:0 0 1.5rem;
+  }
+  @media(min-width:620px){.cover-meta{grid-template-columns:1fr 1fr}}
+  .cover-meta div{display:flex;gap:.9rem;padding:.32rem 0;font-size:.94rem;align-items:baseline}
+  .cover-meta dt{
+    flex:0 0 8.5rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--stone);
+  }
+  .cover-meta dd{margin:0;color:var(--ink)}
+  .fill{color:var(--gold);border-bottom:1px dashed var(--gold-bright);padding-bottom:1px}
+
+  .callout{
+    border-left:2px solid var(--gold);background:var(--surface);
+    padding:.85rem 1.15rem;font-size:.95rem;color:var(--ink-soft);margin:1.5rem 0;
+  }
+  .callout strong{color:var(--ink)}
+  .callout.italic{font-style:italic}
+
+  /* ---------- contents ---------- */
+  .toc{
+    background:var(--surface);border:1px solid var(--line);border-radius:4px;
+    padding:1.1rem 1.35rem;margin:2rem 0 0;
+  }
+  .toc h2{
+    font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--stone);margin:0 0 .7rem;font-weight:500;
+  }
+  .toc ol{margin:0;padding:0;list-style:none;counter-reset:toc}
+  .toc li{counter-increment:toc;display:flex;gap:.8rem;padding:.2rem 0;font-size:.95rem}
+  .toc li::before{content:counter(toc,upper-roman);font-family:var(--mono);font-size:.72rem;color:var(--gold);flex:0 0 2rem;text-align:right;padding-top:.15rem}
+  .toc a{color:var(--ink);text-decoration:none}
+  .toc a:hover{color:var(--gold);text-decoration:underline}
+
+  /* ---------- sections ---------- */
+  .doc section{margin-top:3.4rem;scroll-margin-top:1.5rem}
   .doc h2{
-    font-family:var(--display);
-    font-weight:600;
-    font-size:1.75rem;
-    line-height:1.15;
-    letter-spacing:-.005em;
-    margin:0 0 1rem;
-    text-wrap:balance;
-    position:relative;
+    font-family:var(--display);font-weight:600;font-size:1.8rem;line-height:1.14;
+    letter-spacing:-.005em;margin:0 0 1rem;text-wrap:balance;position:relative;
   }
   .doc h2::before{
-    content:attr(data-num) "  \2014";
-    display:block;
-    font-family:var(--mono);
-    font-size:.7rem;
-    font-weight:500;
-    letter-spacing:.14em;
-    color:var(--gold);
-    margin-bottom:.5rem;
+    content:attr(data-num) "  \2014";display:block;
+    font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.14em;
+    color:var(--gold);margin-bottom:.5rem;
   }
-  h3{
-    font-family:var(--display);
-    font-weight:600;
-    font-size:1.08rem;
-    margin:1.9rem 0 .4rem;
-  }
+  h3{font-family:var(--display);font-weight:600;font-size:1.12rem;margin:1.9rem 0 .45rem}
   p{margin:0 0 1rem}
   a{color:var(--gold);text-underline-offset:2px}
+  code{font-family:var(--mono);font-size:.86em;background:var(--raise);padding:.08em .35em;border-radius:3px}
 
   ul.body,ol.body{margin:0 0 1rem;padding-left:1.3rem}
-  ul.body li,ol.body li{margin:.4rem 0}
+  ul.body li,ol.body li{margin:.42rem 0}
   ul.body li::marker{color:var(--gold)}
 
-  .split{display:grid;gap:1.25rem;grid-template-columns:1fr;margin:1.25rem 0}
+  .split{display:grid;gap:1.15rem;grid-template-columns:1fr;margin:1.25rem 0}
   @media(min-width:640px){.split{grid-template-columns:1fr 1fr}}
-  .panel{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:1.1rem 1.25rem}
-  .panel h4{
-    margin:0 0 .7rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;
-    text-transform:uppercase;font-weight:500;
-  }
-  .panel.build h4{color:var(--olive)}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:1.05rem 1.2rem}
+  .panel h4{margin:0 0 .65rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500}
+  .panel.build h4,.panel.good h4{color:var(--olive)}
   .panel.later h4{color:var(--stone)}
-  .panel.good h4{color:var(--olive)}
   .panel.bad h4{color:var(--crimson)}
-  .panel ul{margin:0;padding-left:1.15rem;font-size:.96rem;line-height:1.6}
+  .panel ul{margin:0;padding-left:1.1rem;font-size:.94rem;line-height:1.58}
   .panel li{margin:.35rem 0}
 
   ol.loop{counter-reset:step;list-style:none;padding:0;margin:1.25rem 0}
-  ol.loop li{
-    position:relative;padding-left:2.6rem;margin:.85rem 0;min-height:1.6rem;
-  }
+  ol.loop li{position:relative;padding-left:2.6rem;margin:.8rem 0}
   ol.loop li::before{
-    counter-increment:step;content:counter(step);
-    position:absolute;left:0;top:-.05rem;
-    width:1.75rem;height:1.75rem;border-radius:50%;
-    display:grid;place-items:center;
-    font-family:var(--mono);font-size:.8rem;color:var(--gold);
+    counter-increment:step;content:counter(step);position:absolute;left:0;top:-.05rem;
+    width:1.7rem;height:1.7rem;border-radius:50%;display:grid;place-items:center;
+    font-family:var(--mono);font-size:.78rem;color:var(--gold);
     border:1px solid var(--line);background:var(--ground);
   }
 
   .trials{display:grid;gap:1rem;grid-template-columns:1fr;margin:1.4rem 0}
   @media(min-width:760px){.trials{grid-template-columns:repeat(3,1fr)}}
-  .trial{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--crimson);border-radius:3px;padding:1.1rem 1.15rem}
-  .trial .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);margin:0 0 .3rem}
-  .trial h4{margin:0 0 .5rem;font-family:var(--display);font-weight:600;font-size:1.05rem}
-  .trial p{font-size:.9rem;line-height:1.55;margin:0 0 .6rem}
-  .trial .refs{font-family:var(--mono);font-size:.72rem;color:var(--gold);line-height:1.5}
+  .trial{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--crimson);border-radius:4px;padding:1.05rem 1.1rem}
+  .trial .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);margin:0 0 .3rem}
+  .trial h4{margin:0 0 .5rem;font-family:var(--display);font-weight:600;font-size:1.03rem}
+  .trial p{font-size:.89rem;line-height:1.52;margin:0 0 .55rem}
+  .trial .refs{font-family:var(--mono);font-size:.7rem;color:var(--gold);line-height:1.5}
 
-  .tablewrap{overflow-x:auto;margin:1.4rem 0;border:1px solid var(--line);border-radius:3px}
-  table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:34rem}
-  th,td{text-align:left;padding:.6rem .9rem;border-bottom:1px solid var(--line);vertical-align:top}
-  thead th{
-    font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--stone);font-weight:500;background:var(--surface);
-  }
+  /* ---------- roadmap phases ---------- */
+  .phase{border:1px solid var(--line);border-radius:5px;overflow:hidden;margin:1.15rem 0;background:var(--surface)}
+  .ph-head{display:flex;flex-wrap:wrap;gap:.6rem .9rem;align-items:baseline;padding:.8rem 1.15rem;border-bottom:1px solid var(--line);background:var(--raise)}
+  .ph-head .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--gold)}
+  .ph-head h3{margin:0;font-size:1.08rem}
+  .ph-head .wks{margin-left:auto;font-family:var(--mono);font-size:.7rem;color:var(--stone);white-space:nowrap}
+  .ph-body{padding:1rem 1.15rem}
+  .ph-body h4{font-family:var(--mono);font-size:.64rem;text-transform:uppercase;letter-spacing:.12em;color:var(--stone);margin:1rem 0 .35rem;font-weight:500}
+  .ph-body h4:first-child{margin-top:0}
+  .ph-body ul{margin:0;padding-left:1.15rem;font-size:.93rem;line-height:1.55}
+  .ph-body li{margin:.28rem 0}
+  .exit{border-left:2px solid var(--olive);padding:.5rem .85rem;background:var(--ground);font-size:.9rem;margin-top:.55rem}
+  .exit b{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--olive);display:block;margin-bottom:.2rem}
+
+  /* ---------- tables ---------- */
+  .tablewrap{overflow-x:auto;margin:1.4rem 0;border:1px solid var(--line);border-radius:4px}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:34rem}
+  th,td{text-align:left;padding:.58rem .9rem;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:500;background:var(--raise)}
   tbody tr:last-child td{border-bottom:0}
-  td.wk{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--gold);white-space:nowrap}
+  td.k{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--gold);white-space:nowrap}
+  .pill{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;padding:.12rem .45rem;border-radius:20px;border:1px solid var(--line);color:var(--ink-soft)}
 
-  footer{margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--line);font-size:.82rem;color:var(--stone);font-family:var(--mono);letter-spacing:.03em}
+  footer{margin-top:4rem;padding-top:1.4rem;border-top:1px solid var(--line);font-size:.8rem;color:var(--stone);font-family:var(--mono);letter-spacing:.03em;line-height:1.7}
 
   @media(min-width:900px){
     .doc{position:relative;padding-left:4rem}
     .doc::before{content:"";position:absolute;left:1.15rem;top:1.1rem;bottom:3rem;border-left:1px dotted var(--line)}
     .doc h2::before{
-      position:absolute;left:-4rem;top:-.15rem;margin:0;
-      width:2.3rem;height:2.3rem;border-radius:50%;
-      display:grid;place-items:center;
-      background:var(--ground);border:1px solid var(--line);
-      content:attr(data-num);
+      position:absolute;left:-4rem;top:-.15rem;margin:0;width:2.3rem;height:2.3rem;
+      border-radius:50%;display:grid;place-items:center;background:var(--ground);
+      border:1px solid var(--line);content:attr(data-num);
     }
   }
 
   @media(prefers-reduced-motion:no-preference){
     .rise{opacity:0;transform:translateY(10px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
-    .rise:nth-child(2){animation-delay:.06s}
-    .rise:nth-child(3){animation-delay:.12s}
-    .rise:nth-child(4){animation-delay:.18s}
-    .rise:nth-child(5){animation-delay:.24s}
-    .rise:nth-child(6){animation-delay:.3s}
+    .rise:nth-child(2){animation-delay:.05s}
+    .rise:nth-child(3){animation-delay:.1s}
+    .rise:nth-child(4){animation-delay:.15s}
+    .rise:nth-child(5){animation-delay:.2s}
+    .rise:nth-child(6){animation-delay:.25s}
+    .rise:nth-child(7){animation-delay:.3s}
     @keyframes rise{to{opacity:1;transform:none}}
+  }
+
+  @media print{
+    :root{--ground:#fff;--surface:#fff;--raise:#f4f1ea;--ink:#1a1a1a;--ink-soft:#333;--line:#c9c2b2}
+    .shell{max-width:none;padding:0}
+    .rise{opacity:1;transform:none;animation:none}
+    .doc{padding-left:0}
+    .doc::before{display:none}
+    .doc h2::before{position:static;border:0;width:auto;height:auto;background:none;display:block}
+    section,.phase,.trial,.panel,.tablewrap{break-inside:avoid}
+    a{color:inherit;text-decoration:none}
+    a[href^="http"]::after{content:" (" attr(href) ")";font-family:var(--mono);font-size:.7em;color:#555;word-break:break-all}
+    .toc a::after{content:none}
   }
 </style>
 
 <div class="shell">
 
-  <header class="hero">
-    <p class="eyebrow rise">Capstone Project &middot; Design Document v0.1</p>
+  <header>
+    <p class="eyebrow rise">Capstone Project &middot; Proposal &amp; Development Roadmap</p>
     <h1 class="rise">Ascension</h1>
     <p class="sub rise">Climb the mountain above the village &mdash; on the word of God, or not at all.</p>
-    <p class="lede rise">A single-player, story-driven game in Unreal Engine 5. The player takes up one of three lives &mdash; a prophet, a high-school student, or a nurse &mdash; and climbs a mountain that rises over a village. Each stage of the climb is a trial set by the Village Master and worked against by tempting spirits. The trials are won not with weapons but with Scripture: the player who knows the word of God, and how to apply it, advances; the player who does not, falls. The tempters know the word too, and will quote it out of shape &mdash; as in Matthew&nbsp;4.</p>
-    <ul class="meta rise">
-      <li><b>Engine</b> &nbsp;Unreal Engine 5</li>
-      <li><b>Method</b> &nbsp;Editor MCP</li>
-      <li><b>Date</b> &nbsp;31 Aug 2026</li>
-      <li><b>Status</b> &nbsp;First ideas</li>
-    </ul>
-    <p class="note rise">This is the first set of ideas &mdash; a starting point for discussion with my advisor, not a locked specification. Everything here is meant to be cut, argued with, and revised.</p>
+
+    <svg class="ridge rise" viewBox="0 0 1200 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <polygon class="r-back" points="0,200 0,120 150,50 320,110 500,30 690,120 880,55 1060,125 1200,70 1200,200"/>
+      <polygon class="r-front" points="0,200 200,140 410,180 620,110 840,165 1030,120 1200,155 1200,200"/>
+      <path class="trail" d="M110,190 L280,165 L190,135 L360,110 L270,80 L440,58 L520,30"/>
+      <circle class="summit" cx="520" cy="30" r="4.5"/>
+    </svg>
+
+    <dl class="cover-meta rise">
+      <div><dt>Prepared by</dt><dd><span class="fill">Olusola Adeaga</span></dd></div>
+      <div><dt>GitHub</dt><dd>shollyp007</dd></div>
+      <div><dt>Course / Module</dt><dd><span class="fill">[course code &amp; title]</span></dd></div>
+      <div><dt>Supervisor</dt><dd><span class="fill">[lecturer name]</span></dd></div>
+      <div><dt>Institution</dt><dd><span class="fill">[institution]</span></dd></div>
+      <div><dt>Date</dt><dd>31 August 2026</dd></div>
+      <div><dt>Repository</dt><dd><a href="https://github.com/shollyp007/Ascension-Game">github.com/shollyp007/Ascension-Game</a></dd></div>
+      <div><dt>Document</dt><dd>Design &amp; Roadmap, v0.2</dd></div>
+    </dl>
+
+    <p class="callout rise"><strong>Note for the assessor.</strong> The repository is currently private. Access has been / will be granted to the supervisor as a collaborator; if you cannot open the link above, please request access and it will be added.</p>
+
+    <nav class="toc rise">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#summary">Executive summary</a></li>
+        <li><a href="#vision">Vision &amp; concept</a></li>
+        <li><a href="#scope">Scope: what the capstone delivers</a></li>
+        <li><a href="#mcp">The Unreal MCP workflow</a></li>
+        <li><a href="#architecture">Technical architecture</a></li>
+        <li><a href="#mechanic">Core mechanic &mdash; Scripture encounters</a></li>
+        <li><a href="#trials">The three first-layer trials</a></li>
+        <li><a href="#content">Handling the seduction theme</a></li>
+        <li><a href="#roadmap">Development roadmap</a></li>
+        <li><a href="#risks">Risk register</a></li>
+        <li><a href="#criteria">Success criteria &amp; assessment mapping</a></li>
+        <li><a href="#tools">Tools &amp; resources</a></li>
+        <li><a href="#references">References</a></li>
+      </ol>
+    </nav>
   </header>
 
   <div class="doc">
 
-    <section>
-      <h2 data-num="I">Scope: an honest reckoning</h2>
-      <p>As written, the full concept &mdash; three playable characters, a realistic village, an ascending series of levels, a dialogue system, spirit AI, a Scripture-knowledge mechanic, save and progression, and win/lose states with a prison &mdash; is two to three years of work for a team. Any one of those is a semester.</p>
-      <p>The capstone should be <strong>one vertical slice</strong>: a single path through the game, built and polished end to end, with the rest designed on paper and shown as concept.</p>
+    <section id="summary">
+      <h2 data-num="I">Executive summary</h2>
+      <p><em>Ascension</em> is a single-player, story-driven game built in Unreal Engine&nbsp;5. The player takes up one of three lives &mdash; a prophet, a high-school student, or a nurse &mdash; and climbs a mountain that rises over a village. Each stage of the climb is a trial set by the Village Master and worked against by tempting spirits. The trials are won not with weapons but with Scripture: the player who knows the word of God, and how to apply it, advances; the player who does not, falls. The tempters know the word too, and quote it out of shape &mdash; as in Matthew&nbsp;4.</p>
+      <p>The project is scoped to a single, fully polished <strong>vertical slice</strong>: one character, the village and the first stretch of mountain, and one complete trial &mdash; the trial of the flesh &mdash; playable from start to resolution, with a character-select menu, a faith / resolve meter, win and lose states, a prison scene, and a working save file. The wider game is designed on paper and presented as concept. Unreal&rsquo;s editor MCP (Model Context Protocol) is used to accelerate level blockout, set dressing, and Blueprint scaffolding.</p>
+      <p>The remainder of this document sets out the concept, the scope boundary, the technical approach, the core mechanic and its scriptural grounding, and a week-by-week development roadmap with deliverables, exit criteria, risks, and assessment mapping.</p>
+    </section>
+
+    <section id="vision">
+      <h2 data-num="II">Vision &amp; concept</h2>
+      <p>The village sits in the shadow of a mountain. To leave it &mdash; to ascend &mdash; is to be tested. The Village Master sets the trials; the tempting spirits work against the player at every stage. The design intent is a game that teaches biblical literacy and discernment through play: the player learns not only <em>what</em> Scripture says but <em>how</em> it is rightly applied, by contrast with how it is twisted.</p>
+      <h3>Player fantasy</h3>
+      <p>&ldquo;I stood in front of something that wanted me to fall, and I answered it with the truth, and it had no more power over me.&rdquo;</p>
+      <h3>Pillars</h3>
+      <ul class="body">
+        <li><strong>Scripture as strength.</strong> Progress is gated on knowledge and discernment, never reflex or force.</li>
+        <li><strong>The tempter is literate.</strong> Encounters are a contest of interpretation, modelled on Matthew&nbsp;4 &mdash; &ldquo;It is written&hellip; It is also written.&rdquo;</li>
+        <li><strong>Failure teaches.</strong> A wrong answer always ends with the correct passage and its explanation, so a loss is still a lesson.</li>
+        <li><strong>Restraint.</strong> Temptation is dialogue and choice, never depiction.</li>
+      </ul>
+    </section>
+
+    <section id="scope">
+      <h2 data-num="III">Scope: what the capstone delivers</h2>
+      <p>The full concept &mdash; three playable characters, a realistic village, an ascending series of levels, a dialogue system, spirit AI, a Scripture-knowledge mechanic, save and progression, and win / lose states with a prison &mdash; is two to three years of work for a team. The capstone delivers one vertical slice, built and polished end to end, with the rest designed on paper. This boundary is treated as frozen; changes go to a backlog rather than into the build.</p>
       <div class="split">
         <div class="panel build">
-          <h4>Build for the capstone</h4>
+          <h4>Built for the capstone</h4>
           <ul>
             <li>One character &mdash; the high-school student (simplest to model, rig, and dress)</li>
             <li>One environment &mdash; the village and the first stretch of mountain</li>
             <li>One trial, fully playable &mdash; the trial of the flesh (seduction)</li>
-            <li>Character-select menu, a faith / resolve meter, pass &amp; fail states</li>
-            <li>The prison scene and a working save file</li>
+            <li>Character-select menu with persistence across levels</li>
+            <li>Faith / resolve meter and tempter influence meter with UI</li>
+            <li>Pass and fail resolution; the prison scene; a working save file</li>
           </ul>
         </div>
         <div class="panel later">
-          <h4>Design on paper, show as concept</h4>
+          <h4>Designed on paper, shown as concept</h4>
           <ul>
             <li>The money and the wealth / status trials</li>
             <li>The prophet and the nurse</li>
             <li>Levels beyond the first</li>
             <li>The Village Master as a character</li>
-            <li>Multiplayer or player-vs-player of any kind</li>
+            <li>Any form of multiplayer</li>
           </ul>
         </div>
       </div>
-      <p>A capstone rewards one thing that works and is documented far above five things that are broken. The slice can be framed as &ldquo;Act&nbsp;I&rdquo; of a larger vision.</p>
+      <p class="callout italic">A capstone rewards one thing that works and is documented far above five things that are broken. The slice is framed as &ldquo;Act&nbsp;I&rdquo; of a larger vision.</p>
     </section>
 
-    <section>
-      <h2 data-num="II">What the Unreal MCP actually gives you</h2>
-      <p>The Unreal MCP servers let a language model drive the editor through Python and Remote Control. Be clear-eyed about the division of labour.</p>
+    <section id="mcp">
+      <h2 data-num="IV">The Unreal MCP workflow</h2>
+      <p>The Unreal MCP servers let a language model drive the editor through Python and Remote Control. The division of labour is deliberate.</p>
       <div class="split">
         <div class="panel good">
-          <h4>Good for</h4>
+          <h4>Used for</h4>
           <ul>
             <li>Greyboxing and layout &mdash; a village street grid, fences, props, in bulk</li>
             <li>Populating the scene with NPCs and set dressing</li>
@@ -269,37 +338,37 @@
           </ul>
         </div>
         <div class="panel bad">
-          <h4>Will not do</h4>
+          <h4>Not relied on for</h4>
           <ul>
-            <li>Realism &mdash; that comes from Fab / Megascans assets, Nanite, Lumen, PCG foliage, and hours of lighting</li>
+            <li>Realism &mdash; from Fab / Megascans assets, Nanite, Lumen, PCG foliage, and lighting</li>
             <li>Art direction and mood</li>
             <li>Gameplay feel and balance</li>
           </ul>
         </div>
       </div>
-      <p><strong>Workflow:</strong> buy a complete village kit &rarr; assemble and populate it with MCP &rarr; scaffold the gameplay Blueprints with MCP &rarr; art-direct the lighting and composition by hand.</p>
+      <p><strong>Pipeline:</strong> acquire a complete village kit &rarr; assemble and populate it with MCP &rarr; scaffold the gameplay Blueprints with MCP &rarr; art-direct the lighting and composition by hand. Every MCP action has a manual fallback, so the tool is an accelerator, not a dependency.</p>
     </section>
 
-    <section>
-      <h2 data-num="III">Technical architecture</h2>
+    <section id="architecture">
+      <h2 data-num="V">Technical architecture</h2>
       <ul class="body">
         <li><strong>Engine:</strong> Unreal Engine 5.4+, built on the Third Person template.</li>
-        <li><strong>Logic:</strong> Blueprints for nearly everything. Drop to C++ only when you hit a wall &mdash; a capstone timeline has no room for a hand-built C++ framework.</li>
+        <li><strong>Logic:</strong> Blueprints for nearly everything; C++ only where unavoidable.</li>
       </ul>
       <h3>Core systems</h3>
       <ul class="body">
-        <li><strong>Character selection</strong> &mdash; a menu level that writes a <code>SelectedCharacter</code> value into a GameInstance so it survives level loads.</li>
-        <li><strong>Trial / encounter</strong> &mdash; a <code>BP_Trial</code> actor with a trigger volume. On overlap it freezes movement and starts a dialogue encounter.</li>
-        <li><strong>Dialogue &amp; choice UI</strong> &mdash; use a plugin (DlgSystem, Not-Yet-Dialogue, or Dialogue Tree). Do not hand-roll this.</li>
-        <li><strong>Scripture knowledge check</strong> &mdash; the heart of the game (Section&nbsp;IV).</li>
+        <li><strong>Character selection</strong> &mdash; a menu level writes a <code>SelectedCharacter</code> value into a GameInstance so it survives level loads.</li>
+        <li><strong>Trial / encounter</strong> &mdash; a <code>BP_Trial</code> actor with a trigger volume freezes movement and starts a dialogue encounter on overlap.</li>
+        <li><strong>Dialogue &amp; choice UI</strong> &mdash; a plugin (DlgSystem, Not-Yet-Dialogue, or Dialogue Tree), not hand-rolled.</li>
+        <li><strong>Scripture knowledge check</strong> &mdash; the core mechanic (Section&nbsp;VI), driven by a Data Table.</li>
         <li><strong>Resolution</strong> &mdash; a pass raises the faith stat and opens the path up; a fail teleports to the prison level and shows a game-over screen with the relevant verse and an invitation to try again.</li>
-        <li><strong>Save</strong> &mdash; an Unreal SaveGame object holding character, current level, faith stat, and trials passed.</li>
-        <li><strong>Spirits</strong> &mdash; no real combat AI. They are dialogue actors that patrol a spline or run a simple Behavior Tree; their attack is verbal &mdash; they approach and open a trial.</li>
+        <li><strong>Save</strong> &mdash; an Unreal SaveGame object holding character, current level, faith stat, and trials passed; the struct is versioned from the start.</li>
+        <li><strong>Spirits</strong> &mdash; dialogue actors that patrol a spline or run a simple Behavior Tree; the attack is verbal &mdash; they approach and open a trial.</li>
       </ul>
     </section>
 
-    <section>
-      <h2 data-num="IV">The core mechanic &mdash; Scripture encounters</h2>
+    <section id="mechanic">
+      <h2 data-num="VI">Core mechanic &mdash; Scripture encounters</h2>
       <p>The design anchor is the temptation of Christ (Matthew&nbsp;4 / Luke&nbsp;4). Satan quotes Scripture &mdash; &ldquo;It is written&rdquo; &mdash; and Jesus answers with better-fitted Scripture &mdash; &ldquo;It is also written.&rdquo; That is the combat system.</p>
       <ol class="loop">
         <li>The tempter makes a proposition and backs it with a real but misapplied verse.</li>
@@ -308,37 +377,37 @@
         <li>Three to five exchanges per encounter. Resolve runs out &rarr; the player falls &rarr; prison. The tempter&rsquo;s influence breaks &rarr; the player ascends.</li>
       </ol>
       <h3>Content pipeline</h3>
-      <p>Build a Data Table where each row is one exchange: the tempter&rsquo;s line, the misused reference, four options each flagged <code>bIsCorrect</code>, and an explanation shown afterward <em>whatever</em> the outcome &mdash; so the player learns, which is the point. The content is authored in a spreadsheet, kept separate from code, and can be handed to a pastor or advisor for review.</p>
-      <p class="note">Get the Scripture content reviewed by someone qualified in your tradition. A game meant to teach the Bible cannot afford to misquote or misapply it &mdash; and an examiner may notice.</p>
+      <p>Each row of a Data Table is one exchange: the tempter&rsquo;s line, the misused reference, four options each flagged <code>bIsCorrect</code>, and an explanation shown afterward <em>whatever</em> the outcome &mdash; so the player learns. Content is authored in a spreadsheet, kept separate from code, and handed to a qualified reviewer.</p>
+      <p class="callout italic">The Scripture content is reviewed by someone qualified in the relevant tradition before it ships. A game meant to teach the Bible cannot afford to misquote or misapply it.</p>
     </section>
 
-    <section>
-      <h2 data-num="V">The three first-layer trials</h2>
-      <p>Frame the trials as the triad of 1&nbsp;John&nbsp;2:16. This gives the level ladder a scriptural spine to cite in the written report.</p>
+    <section id="trials">
+      <h2 data-num="VII">The three first-layer trials</h2>
+      <p>The trials are framed as the triad of 1&nbsp;John&nbsp;2:16, giving the level ladder a scriptural spine that is cited throughout the written report. The capstone builds the first; the other two are designed only.</p>
       <div class="trials">
         <div class="trial">
           <p class="k">Lust of the flesh</p>
-          <h4>Seduction</h4>
-          <p>Tempting spirits press the player toward fornication through flattery and proposition. Verbal and symbolic only &mdash; never depicted.</p>
+          <h4>Seduction &mdash; built</h4>
+          <p>Tempting spirits press the player toward fornication through flattery and proposition. Verbal and symbolic only, never depicted.</p>
           <p class="refs">Proverbs 7 &middot; 1 Cor 6:18 &middot; 2 Tim 2:22</p>
         </div>
         <div class="trial">
           <p class="k">Lust of the eyes</p>
-          <h4>Money</h4>
+          <h4>Money &mdash; designed</h4>
           <p>Gain by compromise &mdash; a bribe, a theft framed as need, a lie that pays. The offer looks like provision.</p>
           <p class="refs">1 Tim 6:9&ndash;10 &middot; Prov 30:8&ndash;9 &middot; Matt 6:24</p>
         </div>
         <div class="trial">
           <p class="k">Pride of life</p>
-          <h4>Wealth &amp; status</h4>
+          <h4>Wealth &amp; status &mdash; designed</h4>
           <p>Recognition, power, a name. &ldquo;All this I will give you&rdquo; &mdash; the summit offered without the climb.</p>
           <p class="refs">Matt 4:8&ndash;10 &middot; Jer 9:23&ndash;24 &middot; James 4:6</p>
         </div>
       </div>
     </section>
 
-    <section>
-      <h2 data-num="VI">Handling the seduction theme</h2>
+    <section id="content">
+      <h2 data-num="VIII">Handling the seduction theme</h2>
       <ul class="body">
         <li><strong>Verbal and symbolic, never depicted.</strong> The temptation is the dialogue and the choice, not any imagery. The tempter flatters and propositions in text; the player answers.</li>
         <li><strong>On failure:</strong> fade to black, then the prison scene with a verse framed as instruction, not punishment.</li>
@@ -346,41 +415,197 @@
       </ul>
     </section>
 
-    <section>
-      <h2 data-num="VII">Milestone plan</h2>
-      <p>Assuming roughly 13&ndash;14 weeks, solo. Cut ruthlessly if the schedule slips &mdash; the menu, one trial, pass / fail, and the write-up are the non-negotiable core.</p>
+    <section id="roadmap">
+      <h2 data-num="IX">Development roadmap</h2>
+      <p>Roughly 14 weeks, solo. Each phase names its tasks, its deliverables, and an exit criterion that must be met before the next phase begins. If the schedule slips, the non-negotiable core is: the menu, one trial, pass / fail, the prison, and the written report.</p>
+
+      <div class="phase">
+        <div class="ph-head"><span class="tag">PHASE 0</span><h3>Pre-production</h3><span class="wks">Weeks 1&ndash;2</span></div>
+        <div class="ph-body">
+          <h4>Tasks</h4>
+          <ul>
+            <li>Finalise this document with the supervisor and freeze scope</li>
+            <li>Install and validate one Unreal MCP server; run a smoke test (spawn and move actors by prompt)</li>
+            <li>Create the UE5 project from the Third Person template; commit the skeleton; set up Git LFS</li>
+            <li>Select the dialogue plugin; source and evaluate a village environment kit; decide the art target (stylised vs full realism)</li>
+            <li>Line up the doctrinal reviewer</li>
+          </ul>
+          <h4>Deliverables</h4>
+          <ul><li>Approved design document &middot; running UE5 project in the repo &middot; MCP smoke-test recording &middot; asset shortlist</li></ul>
+          <div class="exit"><b>Exit criterion</b>MCP can place and modify actors on command, and the project opens clean on a fresh clone.</div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="ph-head"><span class="tag">PHASE 1</span><h3>Environment</h3><span class="wks">Weeks 3&ndash;4</span></div>
+        <div class="ph-body">
+          <h4>Tasks</h4>
+          <ul>
+            <li>Import the village kit; MCP-assisted blockout of the village and the first mountain path</li>
+            <li>Navigation mesh; collision; checkpoint volumes</li>
+            <li>First Lumen lighting pass (single day setting); skybox; atmosphere</li>
+            <li>Player character traversal and camera tuning</li>
+          </ul>
+          <h4>Deliverables</h4>
+          <ul><li>A walkable village and mountain stretch &middot; first-look screenshots and a fly-through video</li></ul>
+          <div class="exit"><b>Exit criterion</b>The player can walk from the village square to the trial location and up to the &ldquo;level&nbsp;2&rdquo; gate without falling through geometry.</div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="ph-head"><span class="tag">PHASE 2</span><h3>Core systems</h3><span class="wks">Weeks 5&ndash;8</span></div>
+        <div class="ph-body">
+          <h4>Tasks</h4>
+          <ul>
+            <li>Character-select menu &rarr; GameInstance persistence</li>
+            <li><code>BP_Trial</code> trigger &rarr; encounter flow; integrate the dialogue plugin</li>
+            <li>Design the Scripture Data Table schema; wire a placeholder trial from it</li>
+            <li>Resolve and influence meters + UMG HUD; pass / fail resolution</li>
+            <li>Prison level and game-over / continue flow</li>
+            <li>Versioned SaveGame (character, level, faith, trials passed); main menu with Continue</li>
+          </ul>
+          <h4>Deliverables</h4>
+          <ul><li>One placeholder trial playable start to finish, with working save and load</li></ul>
+          <div class="exit"><b>Exit criterion</b>A tester can start a new game, fail a trial to the prison, reload, pass it, and reach the mountain path &mdash; with no code changes between runs.</div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="ph-head"><span class="tag">PHASE 3</span><h3>Content &mdash; the seduction trial</h3><span class="wks">Weeks 9&ndash;10</span></div>
+        <div class="ph-body">
+          <h4>Tasks</h4>
+          <ul>
+            <li>Write the five-exchange seduction script &mdash; misapplied vs correctly applied Scripture for each</li>
+            <li>Doctrinal review and sign-off; revise</li>
+            <li>Author the reviewed content into the Data Table; write the explanation screens</li>
+            <li>Build the tempter spirit &mdash; patrol spline, approach behaviour, trial trigger</li>
+            <li>Dialogue presentation styling; optional voice-over</li>
+          </ul>
+          <h4>Deliverables</h4>
+          <ul><li>The trial of the flesh &mdash; complete, reviewed, and in the build</li></ul>
+          <div class="exit"><b>Exit criterion</b>Reviewer sign-off received, and the trial passes a playtest for clarity and difficulty.</div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="ph-head"><span class="tag">PHASE 4</span><h3>Polish &amp; playtest</h3><span class="wks">Weeks 11&ndash;12</span></div>
+        <div class="ph-body">
+          <h4>Tasks</h4>
+          <ul>
+            <li>Audio &mdash; ambience, music, UI and outcome stingers</li>
+            <li>Meter tuning from playtest data; difficulty balance</li>
+            <li>UI polish; bug triage; performance pass (Nanite / Lumen scalability)</li>
+            <li>Accessibility &mdash; text size, subtitles, remappable input, reduced-motion option</li>
+          </ul>
+          <h4>Deliverables</h4>
+          <ul><li>A release-candidate slice build &middot; a written playtest report</li></ul>
+          <div class="exit"><b>Exit criterion</b>No known blocker or crash bugs; the average tester completes the slice unaided.</div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="ph-head"><span class="tag">PHASE 5</span><h3>Submission</h3><span class="wks">Weeks 13&ndash;14</span></div>
+        <div class="ph-body">
+          <h4>Tasks</h4>
+          <ul>
+            <li>Written report; narrated demo video (5&ndash;8 minutes); presentation deck</li>
+            <li>Packaged Windows build; <code>v1.0-slice</code> git tag and GitHub release</li>
+            <li>Final repository tidy; README and documentation updated</li>
+          </ul>
+          <h4>Deliverables</h4>
+          <ul><li>Report &middot; demo video &middot; presentation deck &middot; packaged build &middot; tagged release</li></ul>
+          <div class="exit"><b>Exit criterion</b>All artifacts committed to the repository, and a dry-run presentation completed.</div>
+        </div>
+      </div>
+
+      <h3>Milestone schedule</h3>
       <div class="tablewrap">
         <table>
-          <thead><tr><th>Weeks</th><th>Goal</th></tr></thead>
+          <thead><tr><th>Week</th><th>Milestone</th><th>Primary deliverable</th></tr></thead>
           <tbody>
-            <tr><td class="wk">1&ndash;2</td><td>Learn Unreal basics; get one MCP server driving the editor. First draft of this document.</td></tr>
-            <tr><td class="wk">3&ndash;4</td><td>Village environment imported and assembled (MCP-assisted). Player character walks it.</td></tr>
-            <tr><td class="wk">5&ndash;6</td><td>Character-select menu and GameInstance persistence. Dialogue plugin integrated; one dummy conversation runs.</td></tr>
-            <tr><td class="wk">7&ndash;8</td><td>Trial system: trigger &rarr; encounter &rarr; Scripture Data Table &rarr; pass / fail &rarr; resolve-meter UI.</td></tr>
-            <tr><td class="wk">9</td><td>Prison level, game-over / continue flow, SaveGame.</td></tr>
-            <tr><td class="wk">10</td><td>One spirit NPC that patrols and opens the seduction trial. Full Scripture content for that trial, written and reviewed.</td></tr>
-            <tr><td class="wk">11</td><td>Mountain-path unlock and a placeholder entrance to level 2. Audio, music, polish.</td></tr>
-            <tr><td class="wk">12</td><td>Playtesting, bug fixing, meter balancing.</td></tr>
-            <tr><td class="wk">13&ndash;14</td><td>Written report, demo video, presentation.</td></tr>
+            <tr><td class="k">2</td><td>Scope frozen; toolchain proven</td><td>Approved document; MCP smoke test</td></tr>
+            <tr><td class="k">4</td><td>Environment walkable</td><td>Village + mountain fly-through video</td></tr>
+            <tr><td class="k">6</td><td>Menu &amp; persistence; dialogue running</td><td>Character select &rarr; first conversation</td></tr>
+            <tr><td class="k">8</td><td>Trial loop complete</td><td>Placeholder trial with save / load</td></tr>
+            <tr><td class="k">10</td><td>Seduction trial shipped &amp; reviewed</td><td>Reviewed content in the build</td></tr>
+            <tr><td class="k">12</td><td>Release candidate</td><td>RC build + playtest report</td></tr>
+            <tr><td class="k">14</td><td>Submission</td><td>Report, video, deck, tagged build</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <section>
-      <h2 data-num="VIII">Next steps &amp; open questions</h2>
+    <section id="risks">
+      <h2 data-num="X">Risk register</h2>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Risk</th><th>L</th><th>I</th><th>Mitigation</th></tr></thead>
+          <tbody>
+            <tr><td>Unreal learning curve slows Phases 1&ndash;2</td><td><span class="pill">Med</span></td><td><span class="pill">High</span></td><td>Stay on the template and Blueprints; buy the kit rather than build it; weekly supervisor check-in</td></tr>
+            <tr><td>MCP server unstable or limited</td><td><span class="pill">Med</span></td><td><span class="pill">Med</span></td><td>Treat MCP as an accelerator, not a dependency; every placement task has a manual fallback</td></tr>
+            <tr><td>Doctrinal reviewer unavailable in time</td><td><span class="pill">Low</span></td><td><span class="pill">High</span></td><td>Confirm the reviewer in Phase 0; keep the script short (five exchanges)</td></tr>
+            <tr><td>Scope creep &mdash; second character, more trials</td><td><span class="pill">High</span></td><td><span class="pill">High</span></td><td>Scope frozen in this document; all changes go to a backlog, not the build</td></tr>
+            <tr><td>Asset licensing issues for the village kit</td><td><span class="pill">Low</span></td><td><span class="pill">Med</span></td><td>Use only Fab-licensed or Epic-owned content; keep licence records</td></tr>
+            <tr><td>SaveGame changes corrupt progress</td><td><span class="pill">Med</span></td><td><span class="pill">Med</span></td><td>Version the SaveGame struct from the start; test load early (Phase 2 exit)</td></tr>
+            <tr><td>Performance on the submission machine</td><td><span class="pill">Low</span></td><td><span class="pill">Med</span></td><td>Target 1080p / 60 on the dev GPU; ship with scalability settings exposed</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="criteria">
+      <h2 data-num="XI">Success criteria &amp; assessment mapping</h2>
+      <p>The slice is considered successful when a first-time player can select a character, attempt the seduction trial, lose to the prison, reload, and win through to the mountain path &mdash; understanding, at the end, which Scripture applied and why. The table maps project evidence to typical capstone assessment areas; it will be aligned to the module rubric with the supervisor.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Assessment area</th><th>Evidence in this project</th></tr></thead>
+          <tbody>
+            <tr><td>Technical competence</td><td>MCP-driven pipeline; Blueprint gameplay systems; data-driven content; versioned save / load</td></tr>
+            <tr><td>Design</td><td>A documented mechanic grounded in Matthew 4 and 1 John 2:16; playtested difficulty; learning-through-failure loop</td></tr>
+            <tr><td>Scope &amp; project management</td><td>Delivered slice matches the frozen scope; roadmap with exit criteria; backlog of deferred work; risk register</td></tr>
+            <tr><td>Research</td><td>Engine and MCP evaluation notes; doctrinal review; asset and plugin comparison</td></tr>
+            <tr><td>Communication</td><td>This document; the narrated demo video; the presentation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="tools">
+      <h2 data-num="XII">Tools &amp; resources</h2>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Category</th><th>Choice</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Engine</td><td>Unreal Engine 5.4+</td><td>Third Person template; Blueprints-first</td></tr>
+            <tr><td>Editor automation</td><td>Unreal MCP server</td><td>Specific server selected in Phase 0</td></tr>
+            <tr><td>Dialogue</td><td>DlgSystem / Not-Yet-Dialogue</td><td>Chosen in Phase 0</td></tr>
+            <tr><td>Environment</td><td>Fab village kit</td><td>Licence records kept</td></tr>
+            <tr><td>Version control</td><td>Git + GitHub (private) + Git LFS</td><td><a href="https://github.com/shollyp007/Ascension-Game">github.com/shollyp007/Ascension-Game</a></td></tr>
+            <tr><td>Project tracking</td><td>GitHub Issues + Projects</td><td>Backlog and milestone board</td></tr>
+            <tr><td>Audio</td><td>Fab audio / Freesound / original</td><td>Attribution and licence tracked</td></tr>
+            <tr><td>Doctrinal review</td><td>Qualified reviewer</td><td>Confirmed in Phase 0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="references">
+      <h2 data-num="XIII">References</h2>
+      <p>Citation style to be aligned with the department&rsquo;s requirement; the Bible translation used in-game will be stated (e.g. ESV, NIV, or KJV).</p>
       <ul class="body">
-        <li>Choose and set up one Unreal MCP server.</li>
-        <li>Choose the dialogue plugin.</li>
-        <li>Buy or find the village environment kit; decide the art target &mdash; stylised realism or full realism (this affects everything downstream).</li>
-        <li>Write the full seduction-trial script &mdash; five exchanges &mdash; and get it reviewed.</li>
-        <li>Decide: does the faith meter carry between trials, or reset for each one?</li>
-        <li>Define the four deliverables &mdash; the playable slice, this design document, a demo video, the written report.</li>
+        <li><em>The Holy Bible.</em> Matthew 4:1&ndash;11; Luke 4:1&ndash;13; 1&nbsp;John 2:16; Proverbs 7; 1&nbsp;Corinthians 6:18; 2&nbsp;Timothy 2:22; 1&nbsp;Timothy 6:9&ndash;10; Matthew 6:24; Jeremiah 9:23&ndash;24; James 4:6.</li>
+        <li>Epic Games. <em>Unreal Engine 5 Documentation.</em> docs.unrealengine.com &mdash; Blueprints, UMG, SaveGame, Behavior Trees, Nanite, Lumen, PCG Framework.</li>
+        <li>Epic Games. <em>Fab</em> content marketplace &mdash; licensing terms.</li>
+        <li>Anthropic. <em>Model Context Protocol</em> specification. modelcontextprotocol.io.</li>
+        <li>Community Unreal MCP server &mdash; specific project and repository cited once selected in Phase 0.</li>
       </ul>
     </section>
 
   </div>
 
-  <footer>Ascension &middot; Design Document v0.1 &middot; 31 Aug 2026</footer>
+  <footer>
+    Ascension &middot; Design &amp; Roadmap v0.2 &middot; 31 August 2026<br>
+    Repository: github.com/shollyp007/Ascension-Game &middot; Document history: v0.1 initial ideas &rarr; v0.2 submission roadmap
+  </footer>
 
 </div>

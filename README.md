@@ -12,13 +12,13 @@ slice, with the wider game designed on paper.
 
 ## Status
 
-`v0.1 — first ideas`
+`v0.2 — design & roadmap (submission)`
 
 ## Documents
 
 | Document | Description |
 | --- | --- |
-| [`docs/design-plan.html`](docs/design-plan.html) | Design Document v0.1 — scope, the Unreal MCP workflow, technical architecture, the Scripture-encounter mechanic, the three trials, content handling, and a 14-week milestone plan. Open in a browser. |
+| [`docs/design-plan.html`](docs/design-plan.html) | **Design & Development Roadmap v0.2** — submission document. Cover sheet, executive summary, scope boundary, the Unreal MCP workflow, technical architecture, the Scripture-encounter mechanic, the three trials, content handling, a phase-by-phase 14-week roadmap with exit criteria, milestone schedule, risk register, assessment mapping, tools, and references. Open in a browser (prints cleanly to PDF). |
 
 ## Concept summary
 
