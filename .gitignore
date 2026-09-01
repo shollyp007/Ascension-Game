@@ -1,0 +1,36 @@
+# ---- Unreal Engine ----
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+Script/
+Platforms/
+!Platforms/Android
+!Platforms/iOS
+
+# Compiled Unreal project files
+*.sln
+*.suo
+*.xcodeproj
+*.xcworkspace
+*.VC.db
+*.opendb
+
+# Generated content — commit source, not cooked output
+Content/**/*.autosave
+
+# ---- IDE / editor ----
+.vs/
+.vscode/
+.idea/
+*.user
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Large binary assets ----
+# Track large media with Git LFS instead:
+#   git lfs track "*.uasset" "*.umap" "*.fbx" "*.wav" "*.png"
