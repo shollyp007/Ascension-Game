@@ -39,7 +39,7 @@ nurse, levels beyond the first, the Village Master as a character.
 
 ## Tech notes
 
-- Unreal Engine 5.4+, Third Person template.
+- Unreal Engine 5.4+, Third Person template. Public GitHub repo with Git LFS for binary assets.
 - Blueprints for gameplay logic; C++ only where unavoidable.
 - Dialogue via a plugin (DlgSystem / Not-Yet-Dialogue / Dialogue Tree) — not hand-rolled.
 - Scripture content authored in a Data Table (spreadsheet-editable, review-friendly).
