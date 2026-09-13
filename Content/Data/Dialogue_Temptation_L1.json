@@ -1,0 +1,42 @@
+{
+  "TrialName": "Temptation_Of_Fornication_L1",
+  "NPC_ID": "NPC_Agent_ParkPavilion",
+  "DisguiseName": "Charming Confidante",
+  "ArchetypeTarget": "Student",
+  "DialogueTree": {
+    "Node_01": {
+      "SpeakerPrompt": "Why stay bound to ancient dogmas? Love and pleasure are natural evolutionary instincts. Nobody is hurt.",
+      "CountdownSeconds": 10.0,
+      "Options": [
+        {
+          "ChoiceID": "OPT_A_COMPROMISE",
+          "Text": "I suppose if it's natural and mutually agreed upon, it might be fine...",
+          "ScriptureReference": "None",
+          "VigilanceDelta": -40.0,
+          "FaithDelta": -20.0,
+          "IsCorrect": false,
+          "NextNode": "Node_Trap_Entangled"
+        },
+        {
+          "ChoiceID": "OPT_B_DEBATE",
+          "Text": "I'm disciplined enough to discuss this without losing my convictions.",
+          "ScriptureReference": "Human Reasoning",
+          "VigilanceDelta": -15.0,
+          "FaithDelta": 0.0,
+          "IsCorrect": false,
+          "NextNode": "Node_Trap_Lingering"
+        },
+        {
+          "ChoiceID": "OPT_C_REBUKE_FLEE",
+          "Text": "It is written: Flee youthful passions and pursue righteousness! (2 Timothy 2:22)",
+          "ScriptureReference": "2 Timothy 2:22; 1 Thess 4:3",
+          "VigilanceDelta": 25.0,
+          "FaithDelta": 30.0,
+          "IsCorrect": true,
+          "TriggersFlight": true,
+          "NextNode": "Node_Victory_Ascent"
+        }
+      ]
+    }
+  }
+}
