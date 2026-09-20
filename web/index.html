@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ascension: The Sonship</title>
+<meta name="description" content="Ascension: The Sonship — a story-driven trial of Scripture and spirit. Choose your life. Begin the climb.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- shared cinematic background -->
+  <div class="cine-bg" aria-hidden="true">
+    <img src="assets/img/gate-cinematic-bg.png" alt="" class="cine-bg__img" id="bgImg">
+    <div class="cine-bg__vignette"></div>
+    <div class="cine-bg__grain"></div>
+    <div class="embers" id="embers"></div>
+  </div>
+
+  <!-- ============ SCREEN 1 : TITLE / OPENING ============ -->
+  <section class="screen screen--title is-active" data-screen="title">
+    <div class="crest" aria-hidden="true">
+      <svg viewBox="0 0 120 120" class="crest__svg">
+        <circle cx="60" cy="60" r="56" class="crest__ring-outer"/>
+        <circle cx="60" cy="60" r="46" class="crest__ring-inner"/>
+        <path d="M60 18 L68 46 L96 46 L73 62 L82 90 L60 73 L38 90 L47 62 L24 46 L52 46 Z" class="crest__star"/>
+      </svg>
+    </div>
+
+    <h1 class="title-main">
+      <span class="title-main__word">ASCENSION</span>
+    </h1>
+    <p class="title-sub">THE SONSHIP</p>
+    <p class="title-tagline">A trial of Scripture and spirit, climbed one truth at a time.</p>
+
+    <button class="btn-begin" id="btnBegin" type="button">
+      <span>Begin</span>
+    </button>
+
+    <p class="title-hint">press begin, or press any key</p>
+
+    <footer class="title-footer">
+      <a href="https://github.com/shollyp007/Ascension-Game" target="_blank" rel="noopener">github.com/shollyp007/Ascension-Game</a>
+    </footer>
+  </section>
+
+  <!-- ============ SCREEN 2 : GENDER SELECT ============ -->
+  <section class="screen screen--gender" data-screen="gender">
+    <h2 class="screen-heading">Choose Your Vessel</h2>
+    <p class="screen-subheading">The mountain does not ask who you were. Only who you will become.</p>
+
+    <div class="choice-row choice-row--gender">
+      <button class="gender-card" data-gender="female" type="button">
+        <span class="gender-card__frame">
+          <svg viewBox="0 0 100 100" class="gender-card__icon">
+            <circle cx="50" cy="34" r="20" class="icon-stroke"/>
+            <line x1="50" y1="54" x2="50" y2="88" class="icon-stroke"/>
+            <line x1="34" y1="72" x2="66" y2="72" class="icon-stroke"/>
+          </svg>
+        </span>
+        <span class="gender-card__label">Female</span>
+      </button>
+
+      <button class="gender-card" data-gender="male" type="button">
+        <span class="gender-card__frame">
+          <svg viewBox="0 0 100 100" class="gender-card__icon">
+            <circle cx="45" cy="55" r="20" class="icon-stroke"/>
+            <line x1="59" y1="41" x2="80" y2="20" class="icon-stroke"/>
+            <polyline points="62,20 80,20 80,38" class="icon-stroke"/>
+          </svg>
+        </span>
+        <span class="gender-card__label">Male</span>
+      </button>
+    </div>
+
+    <button class="btn-back" data-back="title" type="button">&larr; back</button>
+  </section>
+
+  <!-- ============ SCREEN 3 : AVATAR SELECT ============ -->
+  <section class="screen screen--avatar" data-screen="avatar">
+    <h2 class="screen-heading">Choose Your Life</h2>
+    <p class="screen-subheading">Three lives climb the same mountain. Each is tempted differently.</p>
+
+    <div class="choice-row choice-row--avatar" id="avatarRow">
+      <!-- populated by JS -->
+    </div>
+
+    <button class="btn-back" data-back="gender" type="button">&larr; back</button>
+  </section>
+
+  <!-- ============ SCREEN 4 : CONFIRM ============ -->
+  <section class="screen screen--confirm" data-screen="confirm">
+    <div class="confirm-card">
+      <span class="confirm-card__frame" id="confirmSigil"></span>
+      <h2 class="confirm-card__name" id="confirmName">—</h2>
+      <p class="confirm-card__role" id="confirmRole">—</p>
+      <p class="confirm-card__blurb" id="confirmBlurb">—</p>
+    </div>
+
+    <button class="btn-begin btn-begin--small" id="btnAscend" type="button">
+      <span>Begin the Climb</span>
+    </button>
+    <button class="btn-back" data-back="avatar" type="button">&larr; choose differently</button>
+  </section>
+
+  <!-- ============ SCREEN 5 : TO BE CONTINUED ============ -->
+  <section class="screen screen--continue" data-screen="continue">
+    <p class="continue-eyebrow" id="continueEyebrow">—</p>
+    <h2 class="continue-title">The path begins.</h2>
+    <p class="continue-body">The rest of the climb — the village, the trials, the Village Master —<br>is still being built.</p>
+    <button class="btn-back btn-back--restart" id="btnRestart" type="button">&larr; return to the gate</button>
+  </section>
+
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
