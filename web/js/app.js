@@ -41,6 +41,23 @@
     prophet: 'The Prophet',
   };
 
+  /**
+   * Portrait art is optional: drop a file at assets/img/avatars/<gender>-<role>.jpg
+   * (e.g. female-nurse.jpg, male-prophet.jpg — 3:4 portrait, waist-up) and it is
+   * picked up automatically. Until then, the gold sigil below is shown instead.
+   */
+  function portraitSrc(gender, roleId) {
+    return `assets/img/avatars/${gender}-${roleId}.jpg`;
+  }
+
+  function portraitMarkup(gender, roleId) {
+    return `
+      <img class="avatar-card__photo" src="${portraitSrc(gender, roleId)}"
+           alt="${ROLE_LABEL[roleId]}" loading="lazy" onerror="this.remove()">
+      ${ICONS[roleId]}
+    `;
+  }
+
   /* ----------------------------------------------------------------- */
   /* State                                                              */
   /* ----------------------------------------------------------------- */
@@ -66,7 +83,7 @@
       card.className = 'avatar-card';
       card.dataset.avatar = roleId;
       card.innerHTML = `
-        <span class="avatar-card__sigil">${ICONS[roleId]}</span>
+        <span class="avatar-card__portrait">${portraitMarkup(state.gender, roleId)}</span>
         <span class="avatar-card__name">${ROLE_LABEL[roleId]}</span>
         <span class="avatar-card__blurb">${BLURBS[roleId]}</span>
         <span class="avatar-card__choose">Choose</span>
@@ -78,7 +95,7 @@
 
   function chooseAvatar(roleId) {
     state.avatar = roleId;
-    document.getElementById('confirmSigil').innerHTML = ICONS[roleId];
+    document.getElementById('confirmSigil').innerHTML = portraitMarkup(state.gender, roleId);
     document.getElementById('confirmName').textContent = ROLE_LABEL[roleId];
     document.getElementById('confirmRole').textContent =
       (state.gender === 'male' ? 'Male' : 'Female') + ' — ' + ROLE_LABEL[roleId];
